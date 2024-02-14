@@ -1,0 +1,138 @@
+#include <at89c5131.h>
+#include "lcd.h"
+
+unsigned int array[5];
+int p = 1;
+int vall = 32;
+unsigned char index[] = "THE INDEX IS X";
+
+sbit l5 = P1^5;
+sbit l6 = P1^6;
+sbit l7 = P1^7;
+sbit l4 = P1^4;
+
+sbit i0 = P1^0;
+sbit i1 = P1^1;
+sbit i2 = P1^2;
+sbit i3 = P1^3;
+
+void swap(int *xp, int *yp)
+{
+	int temp = *xp;
+	*xp = *yp;
+	*yp = temp;
+}
+
+unsigned char getIndex(int number){
+	if(number == array[0]){
+	return '0';
+	}
+	if(number == array[1]){
+	return  '1';
+	}
+	if(number == array[2]){
+	return  '2';
+	}
+	if(number == array[3]){
+	return  '3';
+	}
+	if(number == array[4]){
+	return '4';
+	}
+	return '6';
+}
+	
+void bubbleSort(int arr[], int n)
+{
+int i, j;
+for (i = 0; i < n-1; i++)	{
+	for (j = 0; j < n-i-1; j++){
+		if (arr[j] > arr[j+1]){
+			swap(&arr[j], &arr[j+1]);
+			}
+		}
+	}
+}
+
+int readInput() {
+	int value = 0;
+		i0 = i2 = i3 = i1 =  1;
+			if(i0 == 1){
+			value = 1;
+			}
+			if(i1 == 1){
+			value = value + 2;
+			}
+			if(i2 == 1){
+			value = value + 4;
+			}
+			if(i3 == 1){
+			value = value + 8;
+			}
+			return value;
+}
+void blink(){
+
+l4 = l5 = l6 = l7 = 1;
+msdelay(500);
+l4 = l5 = l6 = l7 = 0;
+msdelay(500);
+lcd_cmd(0x80);													//Move cursor to first line
+lcd_write_string("                ");	
+}
+
+void main()
+{
+	lcd_init();
+	lcd_cmd(0x80);													//Move cursor to first line
+	lcd_write_string(" START PROGRAM  ");
+	l4 = l5 = l6 = l7 =  1;
+	msdelay(5000);
+	lcd_cmd(0x80);	
+	lcd_write_string("   FIRST INPUT  ");
+	msdelay(5000);
+	array[0] = readInput();
+	blink();
+
+	while(p < 5){
+	lcd_cmd(0x80);	
+	lcd_write_string("   NEXT INPUT  ");
+	P1 = 16* array[p-1];
+	msdelay(5000);
+	array[p] = readInput();
+	p++;
+	blink();
+	}
+	lcd_cmd(0x80);
+	
+	l4 = l5 = l6 = l7 =  0;
+	lcd_write_string("    SORTING...  ");
+	bubbleSort(array, 5);
+	lcd_cmd(0x80);
+	lcd_write_string("    SORTING     ");
+	lcd_cmd(0xc0);													//Move cursor to 2nd line of LCD
+	lcd_write_string("   COMPLETED    ");
+	msdelay(5000);
+	
+	for(p = 0 ; p < 5; p++){
+	P1 = 16* array[p];
+	msdelay(5000);
+	}
+	lcd_cmd(0x80);
+	lcd_write_string("   GIVE NUMBER  ");
+	msdelay(5000);
+	vall = readInput();
+	
+	if(getIndex(vall) == '6' ){
+		lcd_cmd(0x80);
+	  lcd_write_string("   NOT FOUND   ");
+	}else{
+		lcd_cmd(0x80);
+		lcd_write_string(" WE FOUND INDEX ");
+ 	  lcd_cmd(0xc0);				//Move cursor to 2nd line of LCD
+		index[13] = getIndex(vall);
+		lcd_write_string(index);
+		msdelay(5000);
+	}
+	while(1);
+}

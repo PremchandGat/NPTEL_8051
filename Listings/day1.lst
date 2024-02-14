@@ -1,0 +1,156 @@
+A51 MACRO ASSEMBLER  DAY1                                                                 06/12/2023 01:02:19 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\day1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE day1.a51 SET(SMALL) DEBUG PRINT(.\Listings\day1.lst) OBJECT(.\Objects\d
+                      ay1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0H
+0000 020100            2     LJMP MAIN
+0100                   3     ORG 100H
+0100                   4     MAIN:
+0100 3130              5     CALL TAKE_INP
+0102 80FE              6     HERE: SJMP HERE
+0130                   7     ORG 130H
+                       8     
+                       9     
+                      10     
+0130                  11     DELAY:
+                      12     
+                      13     
+                      14     
+0130                  15     TAKE_INP:
+0130 757010           16             mov 70H, #16;
+0133 7960             17             mov r1, #60H;
+0135 7D0A             18             mov r5, #10
+0137                  19             TakeIn:
+                      20                     
+0137 3168             21                     acall Indicator
+                      22                     
+0139 7590FF           23                     mov p1, #0ffh
+                      24                     
+013C AB90             25                     mov r3, p1
+013E 3168             26                     acall Indicator
+                      27                     
+                      28                     
+0140 7590FF           29                     mov p1, #0ffh
+                      30                     
+0143 AC90             31                     mov r4, p1
+0145 E4               32                     clr A
+0146 EB               33                     mov A, r3
+0147 C4               34                     swap A
+0148 2C               35                     add A, r4
+0149 F7               36                     mov @r1, A
+014A 09               37                     INC r1
+014B DDEA             38                     djnz r5, TakeIn
+                      39     
+014D                  40     TAKE_INDEX:
+014D 7590FF           41             mov p1, #0ffh
+                      42             
+0150 AC90             43             mov r4, p1
+0152 BC0A00           44             cjne r4 , #10, nnn
+0155                  45             nnn:
+0155 500B             46             jnc nextt
+0157 7960             47                     mov r1, #60H;
+0159 E9               48                     mov A, r1;
+015A 2C               49                     add A, r4;
+015B F9               50                     mov r1, A
+015C 8790             51                     mov p1, @r1;
+015E E7               52                     mov A, @r1
+015F C4               53                     swap A;
+0160 F590             54                     mov p1, A;
+                      55                     
+0162                  56             nextt:
+0162 759000           57             mov p1, #0
+A51 MACRO ASSEMBLER  DAY1                                                                 06/12/2023 01:02:19 PAGE     2
+
+0165 80FE             58             HERESS: SJMP HERESS
+0167 22               59             RET
+                      60                     
+                      61     
+                      62     
+0168                  63     Indicator:
+0168 AF70             64             mov r7 , 70H
+016A 8F90             65             mov p1 , r7
+016C EF               66             mov A, r7
+016D 2410             67             add A, #16
+016F F570             68             mov 70H, A
+0171 22               69             RET
+                      70     
+0172                  71     delay_10sec:
+0172 7F05             72             mov r7, #5
+0174 3179             73             h5: acall delay_1sec
+0176 DFFC             74                     djnz r7, h5
+0178 22               75                     ret
+                      76     
+0179                  77     delay_1sec:
+0179 7E04             78             mov r6, #4
+017B 3180             79             h4: acall delay_250msec
+017D DEFC             80                     djnz r6, h4
+017F 22               81                     ret
+                      82     
+0180                  83     delay_250msec:
+0180 C004             84             push 004
+0182 78FA             85             mov r0, #250
+0184 318B             86             h3: acall delay_1ms
+0186 D8FC             87                     djnz r0, h3
+0188 D000             88                     pop 00h
+018A 22               89                     ret
+                      90     
+018B                  91     delay_1ms:
+018B C000             92             push 00h
+018D 7804             93             mov r0, #4
+018F 3196             94     h2: acall delay_250us
+0191 D8FC             95             djnz r0, h2
+0193 D000             96             pop 00h
+0195 22               97             ret
+                      98             
+0196                  99     delay_250us:
+0196 C000            100             push 00h
+0198 78F4            101             mov r0, #244
+019A D8FE            102             h1: djnz r0, h1
+019C D000            103             pop 00h
+019E 22              104             ret
+                     105     
+                     106     
+                     107     
+019F 22              108     RET
+                     109     END
+A51 MACRO ASSEMBLER  DAY1                                                                 06/12/2023 01:02:19 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0130H   A   
+DELAY_10SEC. . . .  C ADDR   0172H   A   
+DELAY_1MS. . . . .  C ADDR   018BH   A   
+DELAY_1SEC . . . .  C ADDR   0179H   A   
+DELAY_250MSEC. . .  C ADDR   0180H   A   
+DELAY_250US. . . .  C ADDR   0196H   A   
+H1 . . . . . . . .  C ADDR   019AH   A   
+H2 . . . . . . . .  C ADDR   018FH   A   
+H3 . . . . . . . .  C ADDR   0184H   A   
+H4 . . . . . . . .  C ADDR   017BH   A   
+H5 . . . . . . . .  C ADDR   0174H   A   
+HERE . . . . . . .  C ADDR   0102H   A   
+HERESS . . . . . .  C ADDR   0165H   A   
+INDICATOR. . . . .  C ADDR   0168H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+NEXTT. . . . . . .  C ADDR   0162H   A   
+NNN. . . . . . . .  C ADDR   0155H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+TAKEIN . . . . . .  C ADDR   0137H   A   
+TAKE_INDEX . . . .  C ADDR   014DH   A   
+TAKE_INP . . . . .  C ADDR   0130H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

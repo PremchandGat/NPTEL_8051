@@ -1,0 +1,27 @@
+org 00h
+START:
+mov p1, #0fh;
+mov r1, #4;
+acall delay1sec
+acall delay1sec
+acall delay1sec
+acall delay1sec
+
+
+mov p1, #00h;
+stop: sjmp stop;
+
+delay1sec:
+HERES:	mov r2, #250;
+HERES1: acall delay1ms;
+		djnz r2, HERES1
+		RET
+
+delay1ms: mov r4, #4;
+HERE:	mov r3, #250;
+HERE1: djnz r3, HERE1;
+	djnz r4, HERE;
+	RET
+
+	
+end

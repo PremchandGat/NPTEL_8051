@@ -1,0 +1,25 @@
+A51 MACRO ASSEMBLER  DAY2_PS1                                                             06/06/2023 11:21:01 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\day2_ps1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE day2_ps1.a51 SET(SMALL) DEBUG PRINT(.\Listings\day2_ps1.lst) OBJECT(.\O
+                      bjects\day2_ps1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+*** WARNING #A41 IN 0 (day2_ps1.a51, LINE 0): MISSING 'END' STATEMENT
+A51 MACRO ASSEMBLER  DAY2_PS1                                                             06/06/2023 11:21:01 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)

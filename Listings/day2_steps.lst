@@ -1,0 +1,54 @@
+A51 MACRO ASSEMBLER  DAY2_STEPS                                                           06/07/2023 15:03:30 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\day2_steps.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE day2_steps.a51 SET(SMALL) DEBUG PRINT(.\Listings\day2_steps.lst) OBJECT
+                      (.\Objects\day2_steps.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0h
+0000 020100            2     ljmp main
+0100                   3     org 100h
+                       4                     
+                       5                     
+0100                   6                     main : 
+0100 D297              7                             setb p1.7       ;setting port pin 1.4 
+0102 310A              8                             acall delay     ;calling delay label
+0104 C297              9                             clr p1.7        ;clearing port pin 1.4
+0106 310A             10                             acall delay     ;calling delay label
+0108 80F6             11                             sjmp main       ;short jump to main label
+                      12                             
+                      13                     ;code lines written below will generate some delay
+                      14                     
+                      15                     
+010A                  16                     delay :
+010A 7AFF             17                             mov R2,#255
+                      18                             
+010C                  19                     delay1 : 
+010C 79FF             20                             mov R1, #255
+010E D9FE             21                             here : djnz R1, here
+0110 DAFA             22                             djnz R2,delay1 
+0112 22               23                     ret     
+                      24                             
+                      25     end
+A51 MACRO ASSEMBLER  DAY2_STEPS                                                           06/07/2023 15:03:30 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   010AH   A   
+DELAY1 . . . . . .  C ADDR   010CH   A   
+HERE . . . . . . .  C ADDR   010EH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

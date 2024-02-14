@@ -1,0 +1,4 @@
+".\Objects\StopWatch.obj" 
+TO ".\Objects\quiz_2_stopwatch" 
+PRINT(".\Listings\quiz_2_stopwatch.m51") RAMSIZE(256) 
+XDATA( 0X0000-0X03FF )

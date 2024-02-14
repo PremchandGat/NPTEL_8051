@@ -1,0 +1,74 @@
+C51 COMPILER V9.60.7.0   THOMAS                                                            06/16/2023 15:08:25 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE THOMAS
+OBJECT MODULE PLACED IN .\Objects\thomas.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE thomas.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\th
+                    -omas.lst) TABS(2) OBJECT(.\Objects\thomas.obj)
+
+line level    source
+
+   1          #include <at89c5131.h>
+   2          long unsigned int x = 14571;
+   3          long unsigned int y = 8636;
+   4          long unsigned int x1 = 0;
+   5          long unsigned int x0 = 0;
+   6          long unsigned int y1 = 0;
+   7          long unsigned int y0 = 0;
+   8          long unsigned int z0 = 0;
+   9          long unsigned int z1 = 0;
+  10          long unsigned int z2 = 0;
+  11          long unsigned int z = 0;
+  12          
+  13          long unsigned int thomas(unsigned int x , unsigned int y){
+  14   1      long  unsigned int x1 = x/10;
+  15   1      long  unsigned int x0 = x%10;
+  16   1      long  unsigned int y1 = y/10;
+  17   1      long  unsigned int y0 = y%10;
+  18   1      long  unsigned int z0 = x0*y0;
+  19   1      long  unsigned int z1 = (x0+x1)*(y0+y1);
+  20   1      long  unsigned int z2 = x1*y1;
+  21   1      long  unsigned int z = z0 + (z1 - z0 - z2)*10 + z2*100;
+  22   1      return z;
+  23   1      }
+  24          
+  25          void main(){
+  26   1        
+  27   1        // Timer Mode
+  28   1        TMOD = 0x01;
+  29   1        
+  30   1        TH0 = 0;
+  31   1        TL0 = 0;
+  32   1        
+  33   1        // Start timer 0
+  34   1      
+  35   1        
+  36   1        // thomas(14571, 8636);
+  37   1        TR0 = 1;
+  38   1        x1 = x/10;
+  39   1        x0 = x%10;
+  40   1        y1 = y/10;
+  41   1        y0 = y%10;
+  42   1        z0 = x0*y0;
+  43   1        z1 = (x0+x1)*(y0+y1);
+  44   1        z2 = x1*y1;
+  45   1        z = z0 + (z1 - z0 - z2)*10 + z2*100;
+  46   1        TR0 = 0;
+  47   1        while(1);
+  48   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    637    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+C51 COMPILER V9.60.7.0   THOMAS                                                            06/16/2023 15:08:25 PAGE 2   
+
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     40      30
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

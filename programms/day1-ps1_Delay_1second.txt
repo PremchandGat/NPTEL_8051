@@ -1,0 +1,22 @@
+org 00h
+
+mov p2, #0ffh;
+mov r1, #4;
+START:
+acall delay
+
+//djnz r1, START;
+mov p2, #00h;
+
+stop: sjmp stop;
+
+delay: mov r4, 71H;
+	
+HERE:	mov r3, #250;
+
+HERE1: djnz r3, HERE1;
+	djnz r4, HERE;
+	mov p2, #0ffh;
+	RET
+	
+end

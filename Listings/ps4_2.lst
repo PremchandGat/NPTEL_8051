@@ -1,0 +1,74 @@
+A51 MACRO ASSEMBLER  PS4_2                                                                06/13/2023 17:19:06 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\ps4_2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE ps4_2.a51 SET(SMALL) DEBUG PRINT(.\Listings\ps4_2.lst) OBJECT(.\Objects
+                      \ps4_2.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0H
+0000 020100            2     LJMP MAIN
+0100                   3     ORG 100H
+0100                   4     MAIN:
+0100 7860              5     mov r0 , #60H
+0102 7970              6     mov r1, #70H
+0104 7B03              7     mov r3 , #3
+0106 7C01              8     mov r4, #1;
+                       9     
+0108 3130             10     acall MULTI
+010A 80FE             11     HERE: SJMP HERE
+0130                  12     ORG 130H
+                      13     
+                      14     
+0130                  15     MULTI:
+0130 E6               16             mov A, @r0;
+0131 87F0             17             mov B, @r1;
+0133 A4               18             MUL AB;
+0134 313B             19             acall Save
+0136 09               20             INC r1
+0137 08               21             INC r0
+0138 0C               22             INC r4
+0139 DBF5             23             djnz r3, MULTI
+                      24     
+013B                  25     Save:
+013B C000             26             PUSH 00H                                
+013D 7865             27             MOV R0,#65H
+013F 7D00             28             MOV R5, #0;
+0141                  29             increase:
+0141 08               30                     INC R0;
+0142 0D               31                     INC R5;
+0143 DCFC             32                     djnz r4, increase
+0145 A6F0             33             mov @R0, B
+0147 08               34             INC R0
+0148 F6               35             mov @R0, A
+0149 EC               36             MOV A, r4;
+014A 2D               37             add A, r5;
+014B FC               38             mov r4, A;
+014C D000             39             POP 00H
+014E 22               40             RET
+                      41     
+                      42     
+014F 22               43     RET
+                      44     END
+A51 MACRO ASSEMBLER  PS4_2                                                                06/13/2023 17:19:06 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+HERE . . . . . . .  C ADDR   010AH   A   
+INCREASE . . . . .  C ADDR   0141H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+MULTI. . . . . . .  C ADDR   0130H   A   
+SAVE . . . . . . .  C ADDR   013BH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

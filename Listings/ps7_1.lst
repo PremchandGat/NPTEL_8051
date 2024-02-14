@@ -1,0 +1,63 @@
+C51 COMPILER V9.60.7.0   PS7_1                                                             06/14/2023 15:13:52 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE PS7_1
+OBJECT MODULE PLACED IN .\Objects\ps7_1.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ps7_1.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\ps7
+                    -_1.lst) TABS(2) OBJECT(.\Objects\ps7_1.obj)
+
+line level    source
+
+   1          #include <at89c5131.h>
+   2          
+   3          sbit l = P1^6;
+   4          
+   5          void setMode(){
+   6   1        TMOD = 1;     // 16 Bit timer0 mode
+   7   1      }
+   8          
+   9          void startOnTimer(){
+  10   1        TH0 = 0xE0;
+  11   1        TL0 = 0xBF;
+  12   1        TR0 = 1;
+  13   1        while(TF0 == 0);
+  14   1        TR0 = 0;
+  15   1        TF0 = 0;
+  16   1      }
+  17          
+  18          void startOffTimer(){
+  19   1        TH0 = 0xA2;
+  20   1        TL0 = 0x3F;
+  21   1        TR0 = 1;      // Start Timer
+  22   1        while(TF0 == 0);
+  23   1        TR0 = 0;
+  24   1        TF0 = 0;
+  25   1      }
+  26          
+  27          void tooglePin(){
+  28   1        l = ~l;
+  29   1      }
+  30          
+  31          void main(){
+  32   1        setMode();
+  33   1        while(1){
+  34   2        startOnTimer();
+  35   2        tooglePin();
+  36   2        startOffTimer();
+  37   2        tooglePin();
+  38   2        }
+  39   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     56    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

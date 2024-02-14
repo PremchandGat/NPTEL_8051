@@ -1,0 +1,16 @@
+Thomas Time in hex
+0332 // By Function call
+0329 // By unsigned int
+0C3D // By unsigned long int
+818 In Decimal
+409 Microseconds
+
+Steve Time in hex
+0352
+850 In Decimal
+425 Microseconds
+
+As we can see Thomas algorithm took only 409 Microseconds but Steve Algo took 425 Microseconds so we can say that Thomas algo is faster then Steve algorithm
+
+
+Full 30 Times

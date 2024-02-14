@@ -1,0 +1,69 @@
+// Written By: PremchandGat
+// Written at: IIT-Bomaby (WEL-2 LAB)
+// Time: 10:30,9 Jun 2023
+
+ORG 0H
+LJMP MAIN
+ORG 100H
+MAIN:
+CALL FILT
+HERE: SJMP HERE
+ORG 130H
+// *****************
+FILT:
+mov r3 , #8;  					// R3 register maintence the loop counts (as data is 8 bytes long so we need to process it 8 times)
+mov r0, #60H  					// R0 Register maintences the address to register from where we have to pickup data one by one
+mov r1, #70H  					// R1 register mainteces the address where we have to store data after processing
+mov r4, #1;   					// r4 register maintences the count values which are being proccessed
+	FilterData:
+		mov B, #4 				// Put 4 inside B as we have to divide by 4
+		clr C 					// Clear the carry flag
+		cjne r0, #60H, next 	// now check of it is the first value we are processing, if value is not first then move to "next" 
+		mov A, @r0; 			// if the value is first then put the first value inside A 
+		
+	next:
+		cjne r4, #2, next1;		 // check if we are proccesing second value (if the value is not 2nd then move to "next1" block)
+		mov A, @r0 				 // moving value from the address stored inside r0 to A
+		DEC r0; 				 // dicrease r0 [61H -> 60H]
+		add A, @r0;				 // Move value from the address stored inside r0
+		INC r0; 				 // increase r0 (increasing the address stored inside r0 [60H -> 61H] )
+		
+	next1:
+		cjne r4, #3, next2; 	 // check if we are proccesing Third value (executes Instructions from line 33-39), if the value is not 3rd move to "next2"
+		mov A, @r0				
+		DEC r0;
+		add A, @r0;
+		DEC r0;
+		add A, @r0
+		INC r0;
+		INC r0;
+		
+	next2:
+	mov r5, #1; 				// Put 1 inside r5 
+	jnc hh;						// If the carry is set (carry is only set when we are processing them sample number < 4) then executes line 44 else go to "hh"
+		mov r5, #0;				// Update r5 to 0 (we updates r5 to zero if we have carry flag set [ carry is 1 then r5 0, carry is 0 then r5 is 1 ] ) 
+	hh:
+	cjne r5, #1 ,calculate  	// If we are processing sample number more then 3 this condition satisfies and excutes instructions from 43(line number) to 52(line number) else(sample count less then 4 (1,2,3)) directly goes to "calculate"
+		mov A, @r0
+		DEC r0;
+		add A, @r0;
+		DEC r0;
+		add A, @r0
+		DEC r0;
+		add A, @r0
+		INC r0;
+		INC r0;
+		INC r0;
+
+	calculate:
+		DIV AB;                 // devide the A by B
+		mov @r1, A 				// store value from A to address stored inside r1
+		INC r1                  // Increase r1 
+		INC r0 					// Increase r0
+		INC r4					// Increase r4
+		djnz r3, FilterData		// Finally dicrease r3 and jump to "FilterData" if r3 is not zero(we have more values to process)
+		
+
+
+RET
+END

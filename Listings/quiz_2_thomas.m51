@@ -1,0 +1,161 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    06/16/2023  15:08:32  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\thomas.obj TO .\Objects\quiz_2_thomas PRINT (.\Listings\quiz_2_thomas.m51) RAMSIZE
+>>  (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\thomas.obj (THOMAS)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?UIDIV)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?LMUL)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?ULDIV)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\Objects\quiz_2_thomas (THOMAS)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0028H     UNIT         ?DT?THOMAS
+            DATA    0030H     001EH     UNIT         ?DT?_THOMAS?THOMAS
+            IDATA   004EH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0172H     UNIT         ?C?LIB_CODE
+            CODE    0972H     0152H     UNIT         ?PR?MAIN?THOMAS
+            CODE    0AC4H     012BH     UNIT         ?PR?_THOMAS?THOMAS
+            CODE    0BEFH     008CH     UNIT         ?C_C51STARTUP
+            CODE    0C7BH     003DH     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\quiz_2_thomas (THOMAS)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?THOMAS
+  +--> ?C_INITSEG
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\quiz_2_thomas (THOMAS)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        THOMAS
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/16/2023  15:08:32  PAGE 2
+
+
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00C0H         PUBLIC        P4
+  D:00A8H         PUBLIC        IEN0
+  C:0AC4H         PUBLIC        _thomas
+  D:00B8H         PUBLIC        IPL0
+  D:00D8H         PUBLIC        CCON
+  C:0972H         PUBLIC        main
+  D:0008H         PUBLIC        x0
+  D:000CH         PUBLIC        y0
+  D:0010H         PUBLIC        x1
+  D:0014H         PUBLIC        z0
+  D:0018H         PUBLIC        y1
+  D:001CH         PUBLIC        z1
+  D:0020H         PUBLIC        z2
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  D:00F8H         PUBLIC        UEPINT
+  D:00C8H         PUBLIC        T2CON
+  D:0024H         PUBLIC        x
+  D:0028H         PUBLIC        y
+  D:002CH         PUBLIC        z
+  -------         PROC          _THOMAS
+  D:0030H         SYMBOL        x
+  D:0002H         SYMBOL        y
+  -------         DO            
+  D:0032H         SYMBOL        x1
+  D:0036H         SYMBOL        x0
+  D:003AH         SYMBOL        y1
+  D:003EH         SYMBOL        y0
+  D:0042H         SYMBOL        z0
+  D:0046H         SYMBOL        z1
+  D:004AH         SYMBOL        z2
+  D:0004H         SYMBOL        z
+  -------         ENDDO         
+  C:0AC4H         LINE#         13
+  C:0ACCH         LINE#         14
+  C:0ADCH         LINE#         15
+  C:0AF3H         LINE#         16
+  C:0B06H         LINE#         17
+  C:0B1DH         LINE#         18
+  C:0B34H         LINE#         19
+  C:0B67H         LINE#         20
+  C:0B82H         LINE#         21
+  C:0BEEH         LINE#         22
+  C:0BEEH         LINE#         23
+  -------         ENDPROC       _THOMAS
+  -------         PROC          MAIN
+  C:0972H         LINE#         25
+  C:0972H         LINE#         28
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/16/2023  15:08:32  PAGE 3
+
+
+  C:0975H         LINE#         30
+  C:0978H         LINE#         31
+  C:097AH         LINE#         37
+  C:097CH         LINE#         38
+  C:0994H         LINE#         39
+  C:09B5H         LINE#         40
+  C:09CEH         LINE#         41
+  C:09EFH         LINE#         42
+  C:0A02H         LINE#         43
+  C:0A35H         LINE#         44
+  C:0A50H         LINE#         45
+  C:0AC0H         LINE#         46
+  C:0AC2H         LINE#         47
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        THOMAS
+
+  -------         MODULE        ?C?UIDIV
+  C:0800H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+  -------         MODULE        ?C?LMUL
+  C:0855H         PUBLIC        ?C?LMUL
+  -------         ENDMOD        ?C?LMUL
+
+  -------         MODULE        ?C?ULDIV
+  C:08E0H         PUBLIC        ?C?ULDIV
+  -------         ENDMOD        ?C?ULDIV
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_THOMAS?THOMAS
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 02B9H BYTE (34%) *
+******************************************************************************
+
+Program Size: data=79.0 xdata=0 code=1211
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)

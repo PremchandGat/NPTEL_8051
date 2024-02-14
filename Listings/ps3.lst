@@ -1,0 +1,157 @@
+A51 MACRO ASSEMBLER  PS3                                                                  06/12/2023 10:36:02 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\ps3.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE ps3.a51 SET(SMALL) DEBUG PRINT(.\Listings\ps3.lst) OBJECT(.\Objects\ps3
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0H
+0000 020100            2     LJMP MAIN
+0100                   3     ORG 100H
+0100                   4     MAIN:
+0100 3130              5     CALL TAKE_INP
+0102 80FE              6     HERE: SJMP HERE
+0130                   7     ORG 130H
+                       8     
+                       9     
+                      10     
+0130                  11     DELAY:
+                      12     
+                      13     
+                      14     
+0130                  15     TAKE_INP:
+0130 757010           16             mov 70H, #16;
+0133 7960             17             mov r1, #60H;
+0135 7D03             18             mov r5, #3
+0137                  19             TakeIn:
+                      20                     
+0137 3176             21                     acall Indicator
+0139 3180             22                     acall delay_10sec
+013B 7590FF           23                     mov p1, #0ffh
+013E 318E             24                     acall delay_250msec;
+0140 AB90             25                     mov r3, p1
+0142 3176             26                     acall Indicator
+                      27                     
+0144 3180             28                     acall delay_10sec
+0146 7590FF           29                     mov p1, #0ffh
+0149 318E             30                     acall delay_250msec;
+014B AC90             31                     mov r4, p1
+014D E4               32                     clr A
+014E EB               33                     mov A, r3
+014F C4               34                     swap A
+0150 2C               35                     add A, r4
+0151 F7               36                     mov @r1, A
+0152 09               37                     INC r1
+0153 DDE2             38                     djnz r5, TakeIn
+                      39     
+0155                  40     TAKE_INDEX:
+0155 7590FF           41             mov p1, #0ffh
+0158 3180             42             acall delay_10sec
+015A AD90             43             mov r5, p1
+015C BD0300           44             cjne r5 , #3, nnn
+015F                  45             nnn:
+015F 500F             46             jnc nextt
+0161 7960             47                     mov r1, #60H;
+0163 E9               48                     mov A, r1;
+0164 2D               49                     add A, r5;
+0165 F9               50                     mov r1, A
+0166 8790             51                     mov p1, @r1;
+0168 3180             52                     acall delay_10sec
+016A E7               53                     mov A, @r1
+016B C4               54                     swap A;
+016C F590             55                     mov p1, A;
+016E 3180             56                     acall delay_10sec
+0170                  57             nextt:
+A51 MACRO ASSEMBLER  PS3                                                                  06/12/2023 10:36:02 PAGE     2
+
+0170 759000           58             mov p1, #0
+0173 80FE             59             HERESS: SJMP HERESS
+0175 22               60             RET
+                      61                     
+                      62     
+                      63     
+0176                  64     Indicator:
+0176 AF70             65             mov r7 , 70H
+0178 8F90             66             mov p1 , r7
+017A EF               67             mov A, r7
+017B 2410             68             add A, #16
+017D F570             69             mov 70H, A
+017F 22               70             RET
+                      71     
+0180                  72     delay_10sec:
+0180 7F0A             73             mov r7, #10
+0182 3187             74             h5: acall delay_1sec
+0184 DFFC             75                     djnz r7, h5
+0186 22               76                     ret
+                      77     
+0187                  78     delay_1sec:
+0187 7E04             79             mov r6, #4
+0189 318E             80             h4: acall delay_250msec
+018B DEFC             81                     djnz r6, h4
+018D 22               82                     ret
+                      83     
+018E                  84     delay_250msec:
+018E C004             85             push 004
+0190 78FA             86             mov r0, #250
+0192 3199             87             h3: acall delay_1ms
+0194 D8FC             88                     djnz r0, h3
+0196 D000             89                     pop 00h
+0198 22               90                     ret
+                      91     
+0199                  92     delay_1ms:
+0199 C000             93             push 00h
+019B 7804             94             mov r0, #4
+019D 31A4             95     h2: acall delay_250us
+019F D8FC             96             djnz r0, h2
+01A1 D000             97             pop 00h
+01A3 22               98             ret
+                      99             
+01A4                 100     delay_250us:
+01A4 C000            101             push 00h
+01A6 78F4            102             mov r0, #244
+01A8 D8FE            103             h1: djnz r0, h1
+01AA D000            104             pop 00h
+01AC 22              105             ret
+                     106     
+                     107     
+                     108     
+01AD 22              109     RET
+                     110     END
+A51 MACRO ASSEMBLER  PS3                                                                  06/12/2023 10:36:02 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0130H   A   
+DELAY_10SEC. . . .  C ADDR   0180H   A   
+DELAY_1MS. . . . .  C ADDR   0199H   A   
+DELAY_1SEC . . . .  C ADDR   0187H   A   
+DELAY_250MSEC. . .  C ADDR   018EH   A   
+DELAY_250US. . . .  C ADDR   01A4H   A   
+H1 . . . . . . . .  C ADDR   01A8H   A   
+H2 . . . . . . . .  C ADDR   019DH   A   
+H3 . . . . . . . .  C ADDR   0192H   A   
+H4 . . . . . . . .  C ADDR   0189H   A   
+H5 . . . . . . . .  C ADDR   0182H   A   
+HERE . . . . . . .  C ADDR   0102H   A   
+HERESS . . . . . .  C ADDR   0173H   A   
+INDICATOR. . . . .  C ADDR   0176H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+NEXTT. . . . . . .  C ADDR   0170H   A   
+NNN. . . . . . . .  C ADDR   015FH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+TAKEIN . . . . . .  C ADDR   0137H   A   
+TAKE_INDEX . . . .  C ADDR   0155H   A   
+TAKE_INP . . . . .  C ADDR   0130H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

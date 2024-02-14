@@ -1,0 +1,52 @@
+ORG 0H
+LJMP MAIN
+ORG 100H
+MAIN:
+CALL TAKE_INP
+CALL QUANT_ENC
+CALL LED_DISP
+HERE: SJMP HERE
+ORG 130H
+// *****************
+
+
+DELAY:
+// ADD YOUR CODE HERE
+
+TAKE_INP:
+	mov p1, 
+	mov p1, #0ffh
+	mov r3, p1
+	mov r4, p1
+	clr A
+	mov A, r3
+	swap A
+	add A, r4
+	mov 60H, A
+
+// ADD YOUR CODE HERE
+QUANT_ENC:
+// ADD YOUR CODE HERE
+
+LED_DISP:
+// ADD YOUR CODE HERE
+
+
+delay_1ms:
+	push 00h
+	mov r0, #4
+h2: acall delay_250us
+	djnz r0, h2
+	pop 00h
+	ret
+delay_250us:
+	push 00h
+	mov r0, #244
+	h1: djnz r0, h1
+	pop 00h
+	ret
+
+
+
+RET
+END

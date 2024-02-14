@@ -1,0 +1,31 @@
+#include <at89c5131.h>
+#include "lcd.h"
+
+sbit l5 = P1^5;
+sbit l6 = P1^6;
+sbit l7 = P1^7;
+sbit l4 = P1^4;
+
+sbit i0 = P1^0;
+sbit i1 = P1^1;
+sbit i2 = P1^2;
+sbit i3 = P1^3;
+
+
+void main()
+{
+	do{
+	lcd_init();
+	lcd_cmd(0x80);													//Move cursor to first line
+	lcd_write_string("   NPTEL-2023   ");
+	lcd_cmd(0xc0);													//Move cursor to 2nd line of LCD
+	lcd_write_string("   PREMCHAND    ");
+	msdelay(2000);
+	lcd_cmd(0x80);													//Move cursor to first line
+	lcd_write_string("                ");
+	lcd_cmd(0xc0);													//Move cursor to 2nd line of LCD
+	lcd_write_string("                ");
+	msdelay(500);
+	}
+	while(1);
+}

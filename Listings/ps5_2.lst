@@ -1,0 +1,230 @@
+C51 COMPILER V9.60.7.0   PS5_2                                                             06/12/2023 16:03:16 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE PS5_2
+OBJECT MODULE PLACED IN .\Objects\ps5_2.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ps5_2.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\ps5
+                    -_2.lst) TABS(2) OBJECT(.\Objects\ps5_2.obj)
+
+line level    source
+
+   1          #include <at89c5131.h>
+   2          #include "lcd.h"
+   3          
+   4          unsigned int array[5];
+   5          
+   6          sbit r0 = P3^4;
+   7          sbit r1 = P3^5;
+   8          sbit r2 = P3^6;
+   9          sbit r3 = P3^7;
+  10          
+  11          sbit c0 = P3^3;
+  12          sbit c1 = P3^2;
+  13          sbit c2 = P3^1;
+  14          sbit c3 = P3^0;
+  15          
+  16          int inx = 0;
+  17          int j=0;
+  18          int c = 0;
+  19          unsigned char ask[]   =   "ENTER PASSWORD";
+  20          unsigned char pass[]  =  "XXXXXXXX";
+  21          unsigned char cPass[] = "15A8*D6#";
+  22          unsigned char index[] = "THE INDEX IS X";
+  23          
+  24          int canIRead(){
+  25   1        r0 = r1 = r2 = r3 = 1;
+  26   1        c0 = c1 = c2 = c3 = 0;
+  27   1       if(r0 == 1 && r1 == 1 && r2 == 1 && r3 == 1){
+  28   2          return 0;
+  29   2       }
+  30   1          return 1;
+  31   1      }
+  32          
+  33          
+  34          int readRowNumber(){
+  35   1      r0 = r1 = r2 = r3 = 1;
+  36   1      c0 = c1 = c2 = c3 = 0;
+  37   1        
+  38   1        if(r0 == 0) {
+  39   2        return 0;
+  40   2        }
+  41   1        
+  42   1        if(r1 == 0) {
+  43   2        return 1;
+  44   2        }
+  45   1        
+  46   1        if(r2 == 0) {
+  47   2        return 2;
+  48   2        }
+  49   1        
+  50   1        if(r3 == 0) {
+  51   2        return 3;
+  52   2        }
+  53   1      }
+  54          
+C51 COMPILER V9.60.7.0   PS5_2                                                             06/12/2023 16:03:16 PAGE 2   
+
+  55          
+  56          int readColumnNumber(){
+  57   1        c0 = c1 = c2 = c3 = 1;
+  58   1        r0 = r1 = r2 = r3 = 0;
+  59   1        
+  60   1        if(c0 == 0) {
+  61   2        return 0;
+  62   2        }
+  63   1        
+  64   1        if(c1 == 0) {
+  65   2        return 1;
+  66   2        }
+  67   1        
+  68   1        if(c2 == 0) {
+  69   2        return 2;
+  70   2        }
+  71   1        
+  72   1        if(c3 == 0) {
+  73   2        return 3;
+  74   2        }
+  75   1        
+  76   1      }
+  77          
+  78          
+  79          unsigned char readInput() {
+  80   1      
+  81   1        int rr = readRowNumber();
+  82   1        int rc = readColumnNumber();
+  83   1        
+  84   1        if(rr == 0 ){
+  85   2          if(rc == 0){
+  86   3            return '1';
+  87   3          }
+  88   2          if(rc == 1){
+  89   3            return '2';
+  90   3          }
+  91   2          if(rc == 2){
+  92   3            return '3';
+  93   3          }
+  94   2          if(rc == 3){
+  95   3            return 'A';
+  96   3          }
+  97   2        }
+  98   1        
+  99   1        if(rr == 1 ){
+ 100   2          if(rc == 0){
+ 101   3            return '4';
+ 102   3          }
+ 103   2          if(rc == 1){
+ 104   3            return '5';
+ 105   3          }
+ 106   2          if(rc == 2){
+ 107   3            return '6';
+ 108   3          }
+ 109   2          if(rc == 3){
+ 110   3            return 'B';
+ 111   3          }
+ 112   2        }
+ 113   1        
+ 114   1        if(rr == 2 ){
+ 115   2          if(rc == 0){
+ 116   3            return '7';
+C51 COMPILER V9.60.7.0   PS5_2                                                             06/12/2023 16:03:16 PAGE 3   
+
+ 117   3          }
+ 118   2          if(rc == 1){
+ 119   3            return '8';
+ 120   3          }
+ 121   2          if(rc == 2){
+ 122   3            return '9';
+ 123   3          }
+ 124   2          if(rc == 3){
+ 125   3            return 'C';
+ 126   3          }
+ 127   2        }
+ 128   1          
+ 129   1        if(rr == 3 ){
+ 130   2          if(rc == 0){
+ 131   3            return '*';
+ 132   3          }
+ 133   2          if(rc == 1){
+ 134   3            return '0';
+ 135   3          }
+ 136   2          if(rc == 2){
+ 137   3            return '#';
+ 138   3          }
+ 139   2          if(rc == 3){
+ 140   3            return 'D';
+ 141   3          }
+ 142   2        }
+ 143   1      }
+ 144          
+ 145          
+ 146          void main()
+ 147          {
+ 148   1        lcd_init();
+ 149   1        lcd_cmd(0x80);                          //Move cursor to first line
+ 150   1        lcd_write_string("   Welcome   ");
+ 151   1        //lcd_cmd(0xc0);                          //Move cursor to 2nd line of LCD
+ 152   1        //lcd_write_string("Hello, Premchand");
+ 153   1        msdelay(5000);
+ 154   1        while(1){
+ 155   2        lcd_cmd(0x80);                          //Move cursor to first line
+ 156   2        lcd_write_string(ask);
+ 157   2        lcd_cmd(0xc0);                          //Move cursor to 2nd line of LCD
+ 158   2        lcd_write_string(pass);
+ 159   2        if( canIRead() == 1 && inx <= 7){
+ 160   3          pass[inx] =  readInput();
+ 161   3          inx++;
+ 162   3          msdelay(200);
+ 163   3          }
+ 164   2        lcd_cmd(0xc0);                          //Move cursor to 2nd line of LCD
+ 165   2        lcd_write_string(pass);
+ 166   2        if(inx > 7){
+ 167   3          lcd_cmd(0x80);                          //Move cursor to first line
+ 168   3          lcd_write_string("AUTHENTICATING..");
+ 169   3          lcd_cmd(0xc0);                          //Move cursor to 2nd line of LCD
+ 170   3          lcd_write_string(pass);
+ 171   3      
+ 172   3          if(pass[0] == cPass[0] && pass[1] == cPass[1] && pass[2] == cPass[2] && pass[3] == cPass[3] && pass[4] =
+             -= cPass[4] && pass[5] == cPass[5] && pass[6] == cPass[6] && pass[7] == cPass[7] ) {
+ 173   4            lcd_cmd(0x80);                          //Move cursor to first line
+ 174   4            lcd_write_string("CORRECT PASSWORD");
+ 175   4            lcd_cmd(0xc0);                          //Move cursor to 2nd line of LCD
+ 176   4            lcd_write_string("    UNLOCKED    ");
+ 177   4            while(1);
+C51 COMPILER V9.60.7.0   PS5_2                                                             06/12/2023 16:03:16 PAGE 4   
+
+ 178   4          }else{
+ 179   4            j = 0;
+ 180   4            lcd_cmd(0x80);                          //Move cursor to first line
+ 181   4            lcd_write_string("INCORRECT PASS..");
+ 182   4            lcd_cmd(0xc0);                          //Move cursor to 2nd line of LCD
+ 183   4            lcd_write_string("  TRY IN 5 SEC  ");
+ 184   4            msdelay(5000);
+ 185   4            lcd_cmd(0xc0);
+ 186   4            lcd_write_string("                ");
+ 187   4            inx = 0;
+ 188   4            j = 0;
+ 189   4            while(j <= 7 ){
+ 190   5              pass[j] = 'X';
+ 191   5              j++;
+ 192   5            }
+ 193   4          }
+ 194   3        }
+ 195   2      }
+ 196   1      }
+*** WARNING C291 IN LINE 53 OF ps5_2.c: not every exit path returns a value
+*** WARNING C291 IN LINE 76 OF ps5_2.c: not every exit path returns a value
+*** WARNING C291 IN LINE 143 OF ps5_2.c: not every exit path returns a value
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    772    ----
+   CONSTANT SIZE    =    116    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     64       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  3 WARNING(S),  0 ERROR(S)

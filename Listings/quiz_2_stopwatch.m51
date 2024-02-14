@@ -1,0 +1,331 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    06/16/2023  14:58:26  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\StopWatch.obj TO .\Objects\quiz_2_stopwatch PRINT (.\Listings\quiz_2_stopwatch.m51
+>> ) RAMSIZE (256) XDATA (0X0000-0X03FF)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\StopWatch.obj (STOPWATCH)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?SIDIV)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  .\Objects\quiz_2_stopwatch (STOPWATCH)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0015H     UNIT         ?DT?STOPWATCH
+            DATA    001DH     0006H     UNIT         _DATA_GROUP_
+            IDATA   0023H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     00ADH     UNIT         ?PR?TIMER0I?STOPWATCH
+            CODE    08ADH     00A4H     UNIT         ?C?LIB_CODE
+            CODE    0951H     008CH     UNIT         ?C_C51STARTUP
+            CODE    09DDH     005DH     UNIT         ?PR?_GETCHAR?STOPWATCH
+            CODE    0A3AH     005CH     UNIT         ?PR?UPDATELCD?STOPWATCH
+            CODE    0A96H     0037H     UNIT         ?PR?LCD_INIT?STOPWATCH
+            CODE    0ACDH     0028H     UNIT         ?PR?MAIN?STOPWATCH
+            CODE    0AF5H     0025H     UNIT         ?PR?_LCD_WRITE_STRING?STOPWATCH
+            CODE    0B1AH     0024H     UNIT         ?PR?_MSDELAY?STOPWATCH
+            CODE    0B3EH     0022H     UNIT         ?C_INITSEG
+            CODE    0B60H     0012H     UNIT         ?PR?_LCD_CMD?STOPWATCH
+            CODE    0B72H     0012H     UNIT         ?PR?_LCD_WRITE_CHAR?STOPWATCH
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\quiz_2_stopwatch (STOPWATCH)
+
+
+SEGMENT                                   DATA_GROUP 
+  +--> CALLED SEGMENT                   START    LENGTH
+-------------------------------------------------------
+?PR?TIMER0I?STOPWATCH                   -----    -----
+  +--> ?PR?UPDATELCD?STOPWATCH
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/16/2023  14:58:26  PAGE 2
+
+
+?PR?UPDATELCD?STOPWATCH                 -----    -----
+  +--> ?PR?_LCD_CMD?STOPWATCH
+  +--> ?PR?_GETCHAR?STOPWATCH
+  +--> ?PR?_LCD_WRITE_STRING?STOPWATCH
+
+?PR?_LCD_CMD?STOPWATCH                  -----    -----
+  +--> ?PR?_MSDELAY?STOPWATCH
+
+?PR?_LCD_WRITE_STRING?STOPWATCH         0020H    0003H
+  +--> ?PR?_LCD_WRITE_CHAR?STOPWATCH
+
+?PR?_LCD_WRITE_CHAR?STOPWATCH           -----    -----
+  +--> ?PR?_MSDELAY?STOPWATCH
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                           -----    -----
+  +--> ?PR?MAIN?STOPWATCH
+  +--> ?C_INITSEG
+
+?PR?MAIN?STOPWATCH                      -----    -----
+  +--> ?PR?LCD_INIT?STOPWATCH
+  +--> ?PR?UPDATELCD?STOPWATCH
+
+?PR?LCD_INIT?STOPWATCH                  -----    -----
+  +--> ?PR?_LCD_CMD?STOPWATCH
+  +--> ?PR?_MSDELAY?STOPWATCH
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\quiz_2_stopwatch (STOPWATCH)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        STOPWATCH
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00C0H         PUBLIC        P4
+  B:00A8H.7       PUBLIC        EA
+  D:0008H         PUBLIC        minutes
+  D:00A8H         PUBLIC        IEN0
+  B:0080H.2       PUBLIC        EN
+  D:00B8H         PUBLIC        IPL0
+  D:000AH         PUBLIC        isOn
+  C:0800H         PUBLIC        timer0I
+  D:000CH         PUBLIC        timer
+  D:00D8H         PUBLIC        CCON
+  B:0080H.0       PUBLIC        RS
+  C:0ACDH         PUBLIC        main
+  B:0080H.1       PUBLIC        RW
+  D:0017H         PUBLIC        count
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/16/2023  14:58:26  PAGE 3
+
+
+  D:0088H         PUBLIC        TCON
+  C:0AF5H         PUBLIC        _lcd_write_string
+  C:09E8H         PUBLIC        _getChar
+  D:0019H         PUBLIC        prevState
+  C:0B72H         PUBLIC        _lcd_write_char
+  B:00A8H.1       PUBLIC        ET0
+  C:0B60H         PUBLIC        _lcd_cmd
+  C:0A96H         PUBLIC        lcd_init
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  D:00F8H         PUBLIC        UEPINT
+  C:0A3AH         PUBLIC        updateLCD
+  B:0090H.0       PUBLIC        switchI
+  D:00C8H         PUBLIC        T2CON
+  D:001BH         PUBLIC        seconds
+  C:0B1EH         PUBLIC        _msdelay
+  -------         PROC          LCD_INIT
+  C:0A96H         LINE#         25
+  C:0A96H         LINE#         26
+  C:0A96H         LINE#         27
+  C:0A99H         LINE#         28
+  C:0A9BH         LINE#         29
+  C:0A9DH         LINE#         30
+  C:0A9FH         LINE#         32
+  C:0AA5H         LINE#         33
+  C:0AA8H         LINE#         34
+  C:0AAFH         LINE#         35
+  C:0AB2H         LINE#         36
+  C:0AB9H         LINE#         37
+  C:0ABCH         LINE#         38
+  C:0AC3H         LINE#         39
+  C:0AC6H         LINE#         40
+  -------         ENDPROC       LCD_INIT
+  C:0B1AH         SYMBOL        L?0044
+  -------         PROC          L?0043
+  -------         ENDPROC       L?0043
+  C:0B1AH         SYMBOL        L?0044
+  -------         PROC          _MSDELAY
+  D:0006H         SYMBOL        time
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:0B1EH         LINE#         47
+  C:0B1EH         LINE#         48
+  C:0B1EH         LINE#         50
+  C:0B28H         LINE#         51
+  C:0B28H         LINE#         52
+  C:0B36H         LINE#         53
+  C:0B3DH         LINE#         54
+  -------         ENDPROC       _MSDELAY
+  -------         PROC          _LCD_CMD
+  D:0006H         SYMBOL        i
+  C:0B60H         LINE#         61
+  C:0B60H         LINE#         62
+  C:0B60H         LINE#         63
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/16/2023  14:58:26  PAGE 4
+
+
+  C:0B62H         LINE#         64
+  C:0B64H         LINE#         65
+  C:0B66H         LINE#         66
+  C:0B68H         LINE#         67
+  C:0B6FH         LINE#         68
+  C:0B71H         LINE#         69
+  -------         ENDPROC       _LCD_CMD
+  -------         PROC          _LCD_WRITE_CHAR
+  D:0007H         SYMBOL        ch
+  C:0B72H         LINE#         77
+  C:0B72H         LINE#         78
+  C:0B72H         LINE#         79
+  C:0B74H         LINE#         80
+  C:0B76H         LINE#         81
+  C:0B78H         LINE#         82
+  C:0B7AH         LINE#         83
+  C:0B81H         LINE#         84
+  C:0B83H         LINE#         85
+  -------         ENDPROC       _LCD_WRITE_CHAR
+  -------         PROC          _LCD_WRITE_STRING
+  D:0020H         SYMBOL        s
+  C:0AF5H         LINE#         93
+  C:0AFBH         LINE#         94
+  C:0AFBH         LINE#         95
+  C:0B06H         LINE#         96
+  C:0B06H         LINE#         97
+  C:0B17H         LINE#         98
+  C:0B19H         LINE#         99
+  -------         ENDPROC       _LCD_WRITE_STRING
+  -------         PROC          L?0045
+  -------         ENDPROC       L?0045
+  -------         PROC          _GETCHAR
+  D:0006H         SYMBOL        number
+  C:09E8H         LINE#         16
+  C:09E8H         LINE#         18
+  C:09ECH         LINE#         19
+  C:09EFH         LINE#         20
+  C:09EFH         LINE#         22
+  C:09F5H         LINE#         23
+  C:09F8H         LINE#         24
+  C:09F8H         LINE#         26
+  C:09FEH         LINE#         27
+  C:0A01H         LINE#         28
+  C:0A01H         LINE#         30
+  C:0A07H         LINE#         31
+  C:0A0AH         LINE#         32
+  C:0A0AH         LINE#         34
+  C:0A10H         LINE#         35
+  C:0A13H         LINE#         36
+  C:0A13H         LINE#         38
+  C:0A19H         LINE#         39
+  C:0A1CH         LINE#         40
+  C:0A1CH         LINE#         41
+  C:0A22H         LINE#         42
+  C:0A25H         LINE#         43
+  C:0A25H         LINE#         45
+  C:0A2BH         LINE#         46
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/16/2023  14:58:26  PAGE 5
+
+
+  C:0A2EH         LINE#         47
+  C:0A2EH         LINE#         49
+  C:0A34H         LINE#         50
+  C:0A37H         LINE#         51
+  C:0A37H         LINE#         52
+  C:0A39H         LINE#         54
+  -------         ENDPROC       _GETCHAR
+  -------         PROC          UPDATELCD
+  C:0A3AH         LINE#         57
+  C:0A3AH         LINE#         58
+  C:0A41H         LINE#         59
+  C:0A4EH         LINE#         60
+  C:0A56H         LINE#         61
+  C:0A5BH         LINE#         62
+  C:0A5BH         LINE#         63
+  C:0A6BH         LINE#         64
+  C:0A74H         LINE#         66
+  C:0A84H         LINE#         67
+  C:0A8DH         LINE#         68
+  -------         ENDPROC       UPDATELCD
+  -------         PROC          TIMER0I
+  C:0800H         LINE#         71
+  C:081DH         LINE#         73
+  C:0832H         LINE#         74
+  C:083CH         LINE#         76
+  C:083CH         LINE#         77
+  C:084CH         LINE#         78
+  C:084FH         LINE#         79
+  C:0852H         LINE#         80
+  C:085CH         LINE#         82
+  C:085CH         LINE#         83
+  C:086CH         LINE#         84
+  C:0874H         LINE#         85
+  C:087AH         LINE#         86
+  C:087FH         LINE#         88
+  C:087FH         LINE#         89
+  C:088CH         LINE#         90
+  C:0892H         LINE#         91
+  C:0892H         LINE#         92
+  -------         ENDPROC       TIMER0I
+  -------         PROC          MAIN
+  C:0ACDH         LINE#         95
+  C:0ACDH         LINE#         96
+  C:0AD0H         LINE#         97
+  C:0AD3H         LINE#         99
+  C:0AD5H         LINE#         102
+  C:0AD7H         LINE#         105
+  C:0ADAH         LINE#         107
+  C:0ADDH         LINE#         108
+  C:0ADFH         LINE#         111
+  C:0AE1H         LINE#         114
+  C:0AE1H         LINE#         115
+  C:0AE3H         LINE#         116
+  C:0AE6H         LINE#         117
+  C:0AECH         LINE#         118
+  C:0AEEH         LINE#         119
+  C:0AF3H         LINE#         120
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  06/16/2023  14:58:26  PAGE 6
+
+
+  C:0AF3H         LINE#         121
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        STOPWATCH
+
+  -------         MODULE        ?C?CLDPTR
+  C:08ADH         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?SIDIV
+  C:08C6H         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?UIDIV
+  C:08FCH         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_LCD_WRITE_STRING?STOPWATCH
+    CALLER1: ?PR?TIMER0I?STOPWATCH
+    CALLER2: ?C_C51STARTUP
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0256H BYTE (29%) *
+******************************************************************************
+
+Program Size: data=36.0 xdata=0 code=906
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,58 @@
+org 00h
+START:
+mov R0 , 60H
+mov p2, #00;
+acall delay1sec
+CJNE R0, #11H, next1
+mov p2, #0FH;
+acall delay1sec
+next1:
+	mov R0, 61H
+	CJNE R0, #2AH, next2
+	mov p2, #23H;
+next2:
+	acall delay1sec
+	mov R0, 62H
+	CJNE R0, #01H,next3
+	mov p2, #05H;
+next3:
+	acall delay1sec
+	mov R0, 63H
+	CJNE R0, #3FH,next4
+	mov p2, #23H;
+next4:
+	acall delay1sec
+	mov R0, 64H
+	CJNE R0, #18H,next5
+	mov p2, #19H;
+next5:
+	acall delay1sec
+	mov R0, 65H
+	CJNE R0, #1CH,next6
+	mov p2, #19H;
+next6:
+	acall delay1sec
+	INC @R0
+	CJNE R0, #0EH,next7
+	mov p2, #0FH;
+next7:
+	acall delay1sec
+	INC @R0
+	CJNE R0, #06H, stop
+	mov p2, #05H;
+
+stop: sjmp stop;
+
+delay1sec:
+HERES:	mov r2, #250;
+HERES1: djnz r2, delay1ms;
+	RET
+
+delay1ms: mov r4, #4;
+HERE:	mov r3, #250;
+HERE1: djnz r3, HERE1;
+	djnz r4, HERE;
+	djnz r2, HERES1
+	RET
+
+end

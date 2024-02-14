@@ -1,0 +1,37 @@
+ORG 00H
+LJMP MAIN
+ORG 100H
+MAIN:
+CALL ADD16
+HERE:
+SJMP HERE
+ORG 130H
+// *****************
+ADD16:
+MOV r0, 60H
+MOV r1, 61H
+
+MOV r2, 62H
+MOV r3, 63H
+
+MOV A, r1
+ADD A , r3
+MOV r4, A
+
+MOV A , r0
+ADDC A, r2
+MOV r5, A
+
+mov r6, #0
+JNC next
+	mov r6 , #1
+
+next:
+MOV 64H, r6
+MOV 65H, r5
+MOV 66H, r4
+
+// ADD YOUR CODE HERE
+RET
+
+END

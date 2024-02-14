@@ -1,0 +1,150 @@
+C51 COMPILER V9.60.7.0   STOPWATCH                                                         06/16/2023 14:58:26 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE STOPWATCH
+OBJECT MODULE PLACED IN .\Objects\StopWatch.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE StopWatch.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\StopWatch.lst) TABS(2) OBJECT(.\Objects\StopWatch.obj)
+
+line level    source
+
+   1          #include <at89c5131.h>
+   2          #include "lcd.h"
+   3          
+   4          sbit switchI = P1^0;
+   5          
+   6          int isOn = 0;
+   7          
+   8          int count = 0;
+   9          int seconds = 0;
+  10          int minutes = 0;
+  11          
+  12          int prevState = 0;
+  13          
+  14          char timer[] = {'T' , 'I', 'M', 'E' , ':' , '0','0', ':', '0', '0' , '\0'};
+  15          
+  16          char getChar(int number){
+  17   1        
+  18   1        if(number == 0){
+  19   2        return '0';
+  20   2        }
+  21   1        
+  22   1        if(number == 1){
+  23   2        return '1';
+  24   2        }
+  25   1        
+  26   1        if(number == 2){
+  27   2        return '2';
+  28   2        }
+  29   1        
+  30   1        if(number == 3){
+  31   2        return '3';
+  32   2        }
+  33   1        
+  34   1        if(number == 4){
+  35   2        return '4';
+  36   2        }
+  37   1        
+  38   1        if(number == 5){
+  39   2        return '5';
+  40   2        }
+  41   1        if(number == 6){
+  42   2        return '6';
+  43   2        }
+  44   1        
+  45   1        if(number == 7){
+  46   2        return '7';
+  47   2        }
+  48   1        
+  49   1        if(number == 8){
+  50   2        return '8';
+  51   2        }
+  52   1        return '9';
+  53   1        
+  54   1      }
+C51 COMPILER V9.60.7.0   STOPWATCH                                                         06/16/2023 14:58:26 PAGE 2   
+
+  55          
+  56          
+  57          void updateLCD(){
+  58   1        lcd_cmd(0x80);
+  59   1        if(seconds > 59){
+  60   2          minutes++;
+  61   2          seconds = 0;
+  62   2        }
+  63   1        timer[8] = getChar(seconds/10);
+  64   1        timer[9] = getChar(seconds%10);
+  65   1        
+  66   1        timer[5] = getChar(minutes/10);
+  67   1        timer[6] = getChar(minutes%10);
+  68   1        lcd_write_string(timer);
+  69   1      }
+  70          
+  71          void timer0I() interrupt 1  
+  72          {
+  73   1        if(count < 30 && isOn == 1){
+  74   2          count++;
+  75   2          return;
+  76   2        }
+  77   1        if(count == 30 && isOn == 1 ){
+  78   2        TH0 = 0x6B;
+  79   2        TL0 = 0x90;
+  80   2        count++;
+  81   2        return;
+  82   2        }
+  83   1        if(count == 31 && isOn == 1){
+  84   2          seconds++;
+  85   2          count = 0;
+  86   2          updateLCD();
+  87   2          return ;
+  88   2        }
+  89   1        if(count > 31){
+  90   2        count = 0 ;
+  91   2        }
+  92   1      }
+  93          
+  94          
+  95          void main(){
+  96   1        lcd_init();
+  97   1        updateLCD();
+  98   1        // Enable Interupts
+  99   1        EA  = 1;
+ 100   1        
+ 101   1        // Enable Interupts for Timer
+ 102   1        ET0 = 1;
+ 103   1        
+ 104   1        // Timer Mode
+ 105   1        TMOD = 0x01;
+ 106   1        
+ 107   1        TH0 = 0;    
+ 108   1        TL0 = 0;  
+ 109   1      
+ 110   1        // Start timer 0
+ 111   1        TR0 = 1;
+ 112   1        
+ 113   1        
+ 114   1        while(1){
+ 115   2        switchI = 1;
+ 116   2        if(switchI == 1 ){
+C51 COMPILER V9.60.7.0   STOPWATCH                                                         06/16/2023 14:58:26 PAGE 3   
+
+ 117   3        isOn = 1;
+ 118   3        }else{
+ 119   3        isOn = 0;
+ 120   3        } 
+ 121   2      }
+ 122   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    562    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     21       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,63 @@
+ORG 0H
+LJMP MAIN
+ORG 100H
+MAIN:
+CALL QUANT_s
+HERE: SJMP HERE
+ORG 130H
+	
+QUANT_s:
+	mov r3 , #8
+	mov r1, #60H
+	mov r0, #70H
+Quant:	
+	mov A, @r1
+	cjne A , #0, check1
+		mov @r0, #5
+	check1:
+		mov r2, #1
+		jnc next1;
+			mov r2, #0
+		next1:
+			cjne r2, #1, nnext1
+			mov @r0, #5;
+			nnext1:	
+				cjne A, #10, check2
+				mov @r0, #15
+	check2:
+		mov r2, #1
+		jnc next2;
+			mov r2, #0
+		next2:
+			cjne r2, #1, nnext2
+			mov @r0, #15;
+			nnext2:	
+				cjne A, #20, check3
+				mov @r0, #25
+
+	check3:
+		mov r2, #1
+		jnc next3;
+			mov r2, #0
+		next3:
+			cjne r2, #1, nnext3
+			mov @r0, #25;
+			nnext3:	
+				cjne A, #30, check5
+				mov @r0, #25
+		
+	check5:
+		mov r2, #1
+		jnc next5;
+			mov r2, #0
+		next5:
+			cjne r2, #1, nnext5
+			mov @r0, #35;
+			nnext5:	
+			INC r0;
+			INC r1
+			djnz r3 , Quant
+			
+stop: sjmp stop;
+
+end
